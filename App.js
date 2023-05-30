@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 const HeaderComponent = function () {
   return (
     <div>
-      <h1>Hello</h1>
+      <h1 className="bg-orange-900">Hello</h1>
     </div>
   );
 };
