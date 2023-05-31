@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import mainMenu from "../assets/mobile_bar.png";
-import closeMenu from "../assets/close.png";
+import mainMenu from "../assets/Menu.png";
+import closeMenu from "../assets/Close.png";
 
-// import Home from "../components/Home";
-// import List from "../components/List";
+
 import Profile from "../components/Profile";
-// import ProfileExpand from "../components/ProfileExpand";
+import Main from "./Main";
+
 export default function DashBoard(props) {
   const navigate = useNavigate();
   const [active, setActive] = useState("1");
@@ -29,20 +29,20 @@ export default function DashBoard(props) {
     navigate("/");
   };
 
-  useEffect(() => {
-    const checklogin = async () => {
-      const res = await fetch("/user/auth");
-      const data = await res.json();
+  // useEffect(() => {
+  //   const checklogin = async () => {
+  //     const res = await fetch("/user/auth");
+  //     const data = await res.json();
 
-      if (data.msg == "User Login Found") {
-        props.setIsLoggedIn(true);
-      } else {
-        navigate("/");
-        props.setIsLoggedIn(false);
-      }
-    };
-    checklogin();
-  }, []);
+  //     if (data.msg == "User Login Found") {
+  //       props.setIsLoggedIn(true);
+  //     } else {
+  //       navigate("/");
+  //       props.setIsLoggedIn(false);
+  //     }
+  //   };
+  //   checklogin();
+  // }, []);
 
   return (
     <div>
@@ -59,7 +59,7 @@ export default function DashBoard(props) {
               </ul>
             </Link>
             <ul className="lg:flex lg:flex-col mt-10 hidden">
-              <Link to="/dashboard">
+              <Link to="dashboard">
                 <li
                   onClick={selectLink1}
                   className={
@@ -151,7 +151,7 @@ export default function DashBoard(props) {
           <div className=" bg-rp-black ">
             <ul className="">
               <Profile />
-              <Link to="/dashboard">
+              <Link to="/dashboard"> 
                 <li
                   onClick={selectLink1}
                   className={
@@ -295,7 +295,12 @@ export default function DashBoard(props) {
             Logout
           </button>
         </div>
-        <Outlet></Outlet>
+        {/* <Outlet></Outlet> */}
+        <Main
+          setDeleteId={props.setDeleteId}
+          openModalConfirm={props.openModalConfirm}
+          openModalBudget={props.openModalBudget}
+        />
       </div>
     </div>
   );
