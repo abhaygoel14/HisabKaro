@@ -29,8 +29,8 @@ export default function Login(props) {
             const{email,passowrd}=userDetails
             if(email===user.email && passowrd===user.passowrd){
                 props.closeModalLogin();
-                // navigate("/dashboard");
-                alert("login successfully")
+                navigate("/dashboard");
+                // alert("login successfully")
             }else{
                 alert("No details found..")
             }

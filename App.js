@@ -1,11 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import LandingPage from "./js/Pages/LandingPage";
+import DashBoard from "./js/Pages/DashBoard";
+import Main from "./js/Pages/Main";
 import Modal from "react-modal";
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signup from "./js/components/Signup";
 import Login from "./js/components/Login";
+import SetBudget from "./js/components/SetBudget";
+import  AddExpense from "./js/components/AddExpense";
 Modal.setAppElement("#root");
 const HeaderComponent = function () {
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -40,6 +44,7 @@ const HeaderComponent = function () {
     setIsOpenExpense(false);
   }
   function openModalBudget() {
+    console.log("open budget");
     setIsOpenBudget(true);
   }
 
@@ -116,18 +121,22 @@ const HeaderComponent = function () {
               ></LandingPage>
             }
           />
-          {/* <Route
+           <Route
             path="dashboard"
             element={
               <DashBoard
                 isLoggedIn={isLoggedIn}
                 setIsLoggedIn={setIsLoggedIn}
                 openModalExpense={openModalExpense}
+
+                setDeleteId={setDeleteId}
+                openModalConfirm={openModalConfirm}
+                openModalBudget={openModalBudget}
               />
             }
-          >
-            <Route
-              path=""
+          ></Route>
+            {/* <Route
+              path="dashboard"
               element={
                 <Main
                   setDeleteId={setDeleteId}
@@ -135,9 +144,9 @@ const HeaderComponent = function () {
                   openModalBudget={openModalBudget}
                 />
               }
-            ></Route>
+            ></Route> */}
 
-            <Route
+            {/* <Route
               path="analysis"
               element={
                 <MainAnalysis
@@ -164,7 +173,7 @@ const HeaderComponent = function () {
           </Route>
 
           <Route path="/about-us" element={<Developers />} />
-          <Route path="/contact-us" element={<Contact />} /> */}
+          <Route path="/contact-us" element={<Contact />} />  */}
         </Routes>
       </div>
 
@@ -218,7 +227,7 @@ const HeaderComponent = function () {
         />
       </Modal>
 
-      {/* <Modal
+      <Modal
         isOpen={modalIsOpenExpense}
         onRequestClose={closeModalExpense}
         style={customStyles}
@@ -238,9 +247,9 @@ const HeaderComponent = function () {
           </svg>
         </button>
         <AddExpense closeModalExpense={closeModalExpense} />
-      </Modal> */}
+      </Modal>
 
-      {/* <Modal
+      <Modal
         isOpen={modalIsOpenBudget}
         onRequestClose={closeModalBudget}
         style={customStyles}
@@ -260,7 +269,7 @@ const HeaderComponent = function () {
           </svg>
         </button>
         <SetBudget closeModalBudget={closeModalBudget} />
-      </Modal> */}
+      </Modal>
 
       {/* <Modal
         isOpen={modalisOpenConfirm}
