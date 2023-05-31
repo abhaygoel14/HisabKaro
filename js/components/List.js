@@ -63,7 +63,7 @@ export default function List(props) {
         <p className="text-sm font-bold">Your share</p>
         <div className="flex font-bold text-jp-white lg:mt-2 lg:mx-0 mx-4 ">
           <p>₹</p>
-          <h1 className="ml-1">{props.expense.amount.$numberDecimal}</h1>
+          <h1 className="ml-1">{props.expense.amount}</h1>
         </div>
       </div>
     </div>
