@@ -22,7 +22,7 @@ export default function Main(props) {
     // }
     // HandleAllExpense();
 
-    const data = JSON.parse(localStorage.getItem("userExpense")) || [];
+    const data = JSON.parse(localStorage.getItem("userExpense"));
     setExpense(data);
   }, []);
 
@@ -37,7 +37,7 @@ export default function Main(props) {
           style={{ width: 540, height: 640 }}
           className="lg:mt-8 -mt-1"
         >
-          {expense.reverse().map((item) => {
+          {expense?.reverse().map((item) => {
             return (
               <List
                 setDeleteId={props.setDeleteId}
