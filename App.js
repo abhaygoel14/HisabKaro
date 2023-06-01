@@ -10,6 +10,8 @@ import Signup from "./js/components/Signup";
 import Login from "./js/components/Login";
 import SetBudget from "./js/components/SetBudget";
 import  AddExpense from "./js/components/AddExpense";
+import MainAnalysis from "./js/Pages/MainAnalysis";
+import MainDaily from "./js/Pages/MainDaily";
 Modal.setAppElement("#root");
 const HeaderComponent = function () {
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -128,15 +130,11 @@ const HeaderComponent = function () {
                 isLoggedIn={isLoggedIn}
                 setIsLoggedIn={setIsLoggedIn}
                 openModalExpense={openModalExpense}
-
-                setDeleteId={setDeleteId}
-                openModalConfirm={openModalConfirm}
-                openModalBudget={openModalBudget}
               />
             }
-          ></Route>
-            {/* <Route
-              path="dashboard"
+          >
+            <Route
+              path=""
               element={
                 <Main
                   setDeleteId={setDeleteId}
@@ -144,9 +142,9 @@ const HeaderComponent = function () {
                   openModalBudget={openModalBudget}
                 />
               }
-            ></Route> */}
+            ></Route>
 
-            {/* <Route
+            <Route
               path="analysis"
               element={
                 <MainAnalysis
@@ -155,11 +153,11 @@ const HeaderComponent = function () {
                 />
               }
             ></Route>
-
-            <Route
+{/* 
+             <Route
               path="dailyspendanalysis"
               element={<MainSpendAnalysis />}
-            ></Route>
+            ></Route> */}
 
             <Route
               path="daily"
@@ -169,9 +167,11 @@ const HeaderComponent = function () {
                   openModalConfirm={openModalConfirm}
                 />
               }
-            ></Route>
+            ></Route> 
           </Route>
 
+            
+{/* 
           <Route path="/about-us" element={<Developers />} />
           <Route path="/contact-us" element={<Contact />} />  */}
         </Routes>

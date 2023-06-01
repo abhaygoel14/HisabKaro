@@ -196,7 +196,7 @@ export default function Home(props) {
         <div className="flex justify-between items-center">
           <div className="flex">
             <h3 className="text-sm">
-              <span className="text-2xl">₹{TotalSpent}</span>/{totalBudget}
+              <span className="text-2xl">₹{TotalSpent}</span>/{totalBudget?totalBudget:"Set budget"}
             </h3>
             <button
               onClick={props.openModalBudget}
