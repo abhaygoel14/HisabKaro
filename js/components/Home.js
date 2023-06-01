@@ -65,7 +65,7 @@ export default function Home(props) {
     };
     console.log(date);
     const getHomeChartdata = async (e) => {
-        const data=await JSON.parse(localStorage.getItem("userExpense"))  
+        const data=await JSON.parse(localStorage.getItem("userExpense"))|| [] 
         const Segregated = Segregator(data);
         console.log(Segregated);
         TotalSpent = Segregated[1];
@@ -151,7 +151,7 @@ export default function Home(props) {
 
 
     async function handleGetBudget() {
-      const Tbudget=JSON.parse(localStorage.getItem("TotalBudget"))
+      const Tbudget=JSON.parse(localStorage.getItem("TotalBudget")) || []
       setTotalBudget(Tbudget.budget);
        let remaining = Tbudget - TotalSpent;
 
@@ -199,7 +199,7 @@ export default function Home(props) {
         <div className="flex justify-between items-center">
           <div className="flex">
             <h3 className="text-sm">
-              <span className="text-2xl">₹{TotalSpent}</span>/{totalBudget}
+              <span className="text-2xl">₹{TotalSpent}</span>/{totalBudget?totalBudget:"Set budget"}
             </h3>
             <button
               onClick={props.openModalBudget}

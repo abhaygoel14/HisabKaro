@@ -1,43 +1,52 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Home from "../components/Home";
-import Profile from "../components/Profile";
+import Daily from "../components/Daily";
 import List from "../components/List";
+import Profile from "../components/Profile";
 import ProfileExpand from "../components/ProfileExpand";
 import { Scrollbars } from "react-custom-scrollbars";
+import { useNavigate } from "react-router-dom";
+import moment from "moment";
 
-export default function Main(props) {
+export default function MainDaily(props) {
   const navigate = useNavigate();
   const [viewProfile, setViewProfile] = useState("hidden");
-  const [expense, setExpense] = useState([]);
+  let [expense, setExpense] = useState([]);
   useEffect(() => {
-    // async function HandleAllExpense() {
-    //   const res = await fetch("/expense/viewexpense");
+    // async function HandleDailyExpense() {
+    //   const res = await fetch("/expense/getdailyexpense");
     //   const data = await res.json();
+
     //   if (data.errors) {
     //     navigate("/");
     //   } else {
-    //     setExpense(data.expenses);
+    //     setExpense(data.filterData);
     //   }
     // }
-    // HandleAllExpense();
+    // HandleDailyExpense();
 
     const data = JSON.parse(localStorage.getItem("userExpense")) || [];
-    setExpense(data);
-  }, []);
+    var today = new Date();
+    var formattedToday = today.toDateString();
+    var todayObject = data.filter(function (item) {
+      return item.date === formattedToday;
+    });
 
+    console.log(todayObject);
+    console.log(data);
+    setExpense(todayObject);
+  }, []);
   return (
     <>
-      <div className="lg:col-span-2 bg-jp-black -mt-1 lg:mt-0 ">
-        <Home openModalBudget={props.openModalBudget} />
+      <div className="col-span-2 bg-jp-black">
+        <Daily />
       </div>
-      <div className="col-span-2 bg-jp-black ">
+      <div className="col-span-2 bg-jp-black">
         <Profile setViewProfile={setViewProfile} />
         <Scrollbars
           style={{ width: 540, height: 640 }}
           className="lg:mt-8 -mt-1"
         >
-          {expense.reverse().map((item) => {
+          {expense?.map((item) => {
             return (
               <List
                 setDeleteId={props.setDeleteId}
@@ -48,9 +57,7 @@ export default function Main(props) {
           })}
         </Scrollbars>
       </div>
-      <div
-        className={`hidden lg:absolute top-20 right-6 w-fit h-fit ${viewProfile}`}
-      >
+      <div className={`absolute top-20 right-6 w-fit h-fit ${viewProfile}`}>
         <ProfileExpand />
       </div>
     </>

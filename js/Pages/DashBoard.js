@@ -5,7 +5,7 @@ import closeMenu from "../assets/Close.png";
 
 
 import Profile from "../components/Profile";
-import Main from "./Main";
+// import Main from "./Main";
 
 export default function DashBoard(props) {
   const navigate = useNavigate();
@@ -49,7 +49,7 @@ export default function DashBoard(props) {
       <div className="lg:grid lg:grid-cols-5 h-screen font-lexend overflow-y-scroll overflow-x-clip">
         <div className="col-span-1 p-4 bg-rp-black text-jp-yellow">
           <div className="lg:inline flex">
-            <Link to="/">
+            <Link to="/dashboard">
               <ul className="cursor-pointer">
                 <li className="px-2 mt-2 py-1">
                   <h1 className="lg:text-3xl text-lg font-bold">
@@ -59,7 +59,7 @@ export default function DashBoard(props) {
               </ul>
             </Link>
             <ul className="lg:flex lg:flex-col mt-10 hidden">
-              <Link to="dashboard">
+              <Link to="/dashboard">
                 <li
                   onClick={selectLink1}
                   className={
@@ -295,12 +295,12 @@ export default function DashBoard(props) {
             Logout
           </button>
         </div>
-        {/* <Outlet></Outlet> */}
-        <Main
+        <Outlet></Outlet>
+        {/* <Main
           setDeleteId={props.setDeleteId}
           openModalConfirm={props.openModalConfirm}
           openModalBudget={props.openModalBudget}
-        />
+        /> */}
       </div>
     </div>
   );
