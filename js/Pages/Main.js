@@ -11,17 +11,6 @@ export default function Main(props) {
   const [viewProfile, setViewProfile] = useState("hidden");
   const [expense, setExpense] = useState([]);
   useEffect(() => {
-    // async function HandleAllExpense() {
-    //   const res = await fetch("/expense/viewexpense");
-    //   const data = await res.json();
-    //   if (data.errors) {
-    //     navigate("/");
-    //   } else {
-    //     setExpense(data.expenses);
-    //   }
-    // }
-    // HandleAllExpense();
-
     const data = JSON.parse(localStorage.getItem("userExpense"));
     setExpense(data);
   }, []);
@@ -43,6 +32,8 @@ export default function Main(props) {
                 setDeleteId={props.setDeleteId}
                 openModalConfirm={props.openModalConfirm}
                 expense={item}
+                openModalExpense={props.openModalExpense}
+                setEditItemId={props.setEditItemId}
               />
             );
           })}

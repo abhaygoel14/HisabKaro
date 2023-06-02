@@ -109,7 +109,7 @@ export default function Analysis(props) {
         props.setListExpense(data);
         const Segregated = Segregator(data);
         console.log(Segregated);
-        TotalSpent = Segregated[1];
+        // TotalSpent = Segregated[1];
         SetExpenseData({
           datasets: [
             {

@@ -22,6 +22,8 @@ export default function MainAnalysis(props) {
                 ? listExpense.map((item) => {
                     return (
                       <List
+                      openModalExpense={props.openModalExpense}
+                      setEditItemId={props.setEditItemId}
                         setDeleteId={props.setDeleteId}
                         openModalConfirm={props.openModalConfirm}
                         expense={item}

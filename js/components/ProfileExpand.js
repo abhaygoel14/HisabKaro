@@ -40,7 +40,7 @@ export default function ProfileExpand() {
             />
           </svg>
           <h1 className="ml-2 col-span-8 text-jp-white uppercase">
-            {user.name}
+            {user?.name}
           </h1>
         </div>
         <div className="grid grid-cols-9 mt-4 text-rp-yellow">
@@ -54,7 +54,7 @@ export default function ProfileExpand() {
             <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
           </svg>
           <h1 className="ml-2 col-span-8 text-jp-white uppercase">
-            {user.email}
+            {user?.email}
           </h1>
         </div>
       </div>

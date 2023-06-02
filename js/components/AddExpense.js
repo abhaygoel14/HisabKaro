@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import DatePicker2 from "./DatePicker2";
 import ReactLoading from "react-loading";
 import { Scrollbars } from "react-custom-scrollbars";
+import { useEffect } from "react";
 
 const AddExpense = (props) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -26,41 +27,50 @@ const AddExpense = (props) => {
       msg: "",
     });
 
+    const existingData = JSON.parse(localStorage.getItem("userExpense")) || [];
+    if (props.editItemId !== null) {
+      //It executes when user try to edit existing expense.
+      const filterData = existingData.filter((ele) => {
+        return ele._id !== props.editItemId;
+      });
 
-    const existingData=JSON.parse(localStorage.getItem('userExpense')) || [];
-    existingData.push(expense);
-    localStorage.setItem('userExpense', JSON.stringify(existingData));
-   
-    const timer=setTimeout(() => {
-        setIsLoading(false);
-        props.closeModalExpense();
-        navigate("/dashboard");
-        window.location.reload();
-    }, 2000);
-
-    return()=>{
-        clearTimeout(timer)
+      filterData.push({
+        ...expense,
+        _id: Math.random() * 10000 + expense.desc,
+      });
+      localStorage.setItem("userExpense", JSON.stringify(filterData));
+    } 
+    
+    else {
+      //It executes when user try to add new expense.
+      existingData.push({
+        ...expense,
+        _id: Math.random() * 10000 + expense.desc,
+      });
+      localStorage.setItem("userExpense", JSON.stringify(existingData));
     }
 
-    // const res = await fetch("/expense/addexpense", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(expense),
-    // });
-    // const data = await res.json();
-    // if (data.errors) {
-    //   setIsLoading(false);
-    //   setError(data.errors);
-    //   console.log(data.errors);
-    // } else {
-    //   setIsLoading(false);
-    //   props.closeModalExpense();
-    //   navigate("/dashboard");
-    //   window.location.reload();
-    // }
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+      props.closeModalExpense();
+      navigate("/dashboard");
+      window.location.reload();
+    }, 2000);
+
+    return () => {
+      clearTimeout(timer);
+    };
   };
+
+  useEffect(() => {
+    if (props.editItemId !== null) {
+      const expenseData = JSON.parse(localStorage.getItem("userExpense"));
+      const editData = expenseData.find((ele) => {
+        return ele._id == props.editItemId;
+      });
+      setExpense(editData);
+    }
+  }, [props.editItemId]);
 
   return (
     <Scrollbars style={{ width: 540, height: 500 }} className="mt-8">
