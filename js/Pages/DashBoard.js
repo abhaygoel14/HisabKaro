@@ -29,20 +29,6 @@ export default function DashBoard(props) {
     navigate("/");
   };
 
-  // useEffect(() => {
-  //   const checklogin = async () => {
-  //     const res = await fetch("/user/auth");
-  //     const data = await res.json();
-
-  //     if (data.msg == "User Login Found") {
-  //       props.setIsLoggedIn(true);
-  //     } else {
-  //       navigate("/");
-  //       props.setIsLoggedIn(false);
-  //     }
-  //   };
-  //   checklogin();
-  // }, []);
 
   return (
     <div>
@@ -53,7 +39,7 @@ export default function DashBoard(props) {
               <ul className="cursor-pointer">
                 <li className="px-2 mt-2 py-1">
                   <h1 className="lg:text-3xl text-lg font-bold">
-                    Expense Tracker
+                    Hisab Karo
                   </h1>
                 </li>
               </ul>
@@ -249,10 +235,10 @@ export default function DashBoard(props) {
           </div>
         </div>
 
-        <div className=" lg:block absolute bottom-14 z-50 right-5 lg:bottom-20 lg:left-16 lg:right-0">
+        <div className=" lg:block absolute bottom-14 z-50 right-5 lg:bottom-20 lg:left-16 lg:right-0" style={{ width: 'max-content'}}>
           <button
             onClick={props.openModalExpense}
-            className="bg-mj-yellow px-4 py-3 flex rounded-md font-bold duration-300 ease-out hover:scale-110"
+            className="bg-mj-yellow px-4 py-3 flex  rounded-md font-bold duration-300 ease-out hover:scale-110"
           >
             <span>
               <svg
@@ -268,7 +254,7 @@ export default function DashBoard(props) {
                 />
               </svg>
             </span>
-            <span className="hidden lg:block">Add Expense</span>
+            <span className="hidden lg:block ">Add Expense</span>
           </button>
         </div>
         <div className="hidden lg:block lg:absolute bottom-5 left-16">
@@ -296,11 +282,6 @@ export default function DashBoard(props) {
           </button>
         </div>
         <Outlet></Outlet>
-        {/* <Main
-          setDeleteId={props.setDeleteId}
-          openModalConfirm={props.openModalConfirm}
-          openModalBudget={props.openModalBudget}
-        /> */}
       </div>
     </div>
   );

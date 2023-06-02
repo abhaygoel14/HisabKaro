@@ -14,19 +14,6 @@ export default function LandingPage(props) {
     navigate("/");
   };
 
-//   useEffect(() => {
-//     const checklogin = async () => {
-//       const res = await fetch("/user/auth");
-//       const data = await res.json();
-//       console.log(data);
-//       if (data.msg === "Login to Proceed") {
-//         props.setIsLoggedIn(false);
-//       } else {
-//         props.setIsLoggedIn(true);
-//       }
-//     };
-//     checklogin();
-//   }, []);
 
   const [isMobile, setIsMobile] = useState(true);
 
@@ -39,7 +26,7 @@ export default function LandingPage(props) {
         >
           <div className="flex">
             <h1 className="text-rp-yellow text-3xl font-semibold pt-4">
-              Expense Tracker
+              Hisab Karo
             </h1>
             <button
               className=" ml-auto mt-4 bg-mj-yellow rounded-md "
@@ -97,7 +84,7 @@ export default function LandingPage(props) {
         id="navbar"
       >
         <h1 className="text-rp-yellow lg:text-4xl font-semibold text-xl">
-          Expense Tracker
+          Hisab Karo
         </h1>
         <div className="grid grid-cols-3 lg:flex items-center lg:justify-between text-mj-yellow ">
           {/* <Link to="/about-us"> */}
@@ -133,7 +120,7 @@ export default function LandingPage(props) {
         <div className="my-auto">
           <div className="lg:text-6xl lg:py-3 text-2xl p-1">
             The{" "}
-            <span className="text-mj-yellow underline">Expense Tracker</span>{" "}
+            <span className="text-mj-yellow underline">Hisab Karo</span>{" "}
             that works for you
           </div>
           <div className="lg:text-2xl py-2 text-xl mt-4">

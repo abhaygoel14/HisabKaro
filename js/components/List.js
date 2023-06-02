@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Money from "../assets/money.png";
-
+import EditButton from '../assets/edit-button-svgrepo-com.png'
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 
@@ -10,6 +10,12 @@ export default function List(props) {
     props.setDeleteId(props.expense._id);
     props.openModalConfirm();
   };
+
+  const handleEdit=(itemId)=>{
+    // console.log(itemId);
+    props.openModalExpense(true)
+    props.setEditItemId(itemId)
+  }
   return (
     <div className="m-2 mt-4 lg:mt-0 mx-4 lg:mx-0 p-2  lg:grid lg:grid-cols-7  text-slate-300 bg-rp-black rounded-xl lg:p-4 lg:m-6 lg:w-[90%] w-[65%] flex">
       <div
@@ -29,6 +35,7 @@ export default function List(props) {
           />
         </svg>
       </div>
+
       <div className="bg-jp-black rounded-full lg:w-2/3 w-fit  h-12 relative top-3 p-2 mb-8 lg:mb-3">
         <img src={Money} className="h-7 w-7 mt-1"></img>
       </div>
@@ -55,8 +62,9 @@ export default function List(props) {
             <p className="text-sm  ml-1">{props.expense.category}</p>
           </div>
         </div>
-        <div className="lg:mt-1  mt-2 ">
-          <h1 className="font-bold">{props.expense.desc}</h1>
+        <div className="lg:mt-1 w-full  mt-2 flex " style={{gap:"2rem"}}>
+          <h1 className="font-bold mr-2">{props.expense.desc}</h1>
+          <img src={EditButton} onClick={()=>handleEdit(props.expense._id)} style={{width:"1rem",height:"1rem",alignSelf:"center"}} className="text-jp-yellow cursor-pointer hover:scale-110"/>
         </div>
       </div>
       <div className="lg:col-span-2 lg:ml-6 ml-3 lg:mt-0 mt-2 ">

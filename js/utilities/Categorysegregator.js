@@ -12,8 +12,8 @@ module.exports.Segregator = (data) => {
 
   data?.forEach((item) => {
     console.log(item);
-    segregated[item.category] += parseInt(Math.floor(item.amount));
-    total += parseInt(item.amount);
+    segregated[item?.category] += parseInt(Math.floor(item?.amount));
+    total += parseInt(item?.amount);
   });
   return [segregated, total];
 };

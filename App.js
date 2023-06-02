@@ -12,6 +12,7 @@ import SetBudget from "./js/components/SetBudget";
 import  AddExpense from "./js/components/AddExpense";
 import MainAnalysis from "./js/Pages/MainAnalysis";
 import MainDaily from "./js/Pages/MainDaily";
+import ConfirmDelete from "./js/components/ConfirmDelete";
 Modal.setAppElement("#root");
 const HeaderComponent = function () {
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -22,6 +23,8 @@ const HeaderComponent = function () {
   const [modalIsOpenContact, setIsOpenContact] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState();
   const [deleteId, setDeleteId] = useState();
+  const [editItemId,setEditItemId]=useState(null)
+ 
 
   function openModalContact() {
     setIsOpenContact(true);
@@ -140,6 +143,8 @@ const HeaderComponent = function () {
                   setDeleteId={setDeleteId}
                   openModalConfirm={openModalConfirm}
                   openModalBudget={openModalBudget}
+                  openModalExpense={openModalExpense}
+                  setEditItemId={setEditItemId}
                 />
               }
             ></Route>
@@ -150,6 +155,8 @@ const HeaderComponent = function () {
                 <MainAnalysis
                   setDeleteId={setDeleteId}
                   openModalConfirm={openModalConfirm}
+                  openModalExpense={openModalExpense}
+                  setEditItemId={setEditItemId}
                 />
               }
             ></Route>
@@ -246,7 +253,7 @@ const HeaderComponent = function () {
             />
           </svg>
         </button>
-        <AddExpense closeModalExpense={closeModalExpense} />
+        <AddExpense editItemId={editItemId} closeModalExpense={closeModalExpense} />
       </Modal>
 
       <Modal
@@ -271,7 +278,7 @@ const HeaderComponent = function () {
         <SetBudget closeModalBudget={closeModalBudget} />
       </Modal>
 
-      {/* <Modal
+      <Modal
         isOpen={modalisOpenConfirm}
         onRequestClose={closeModalConfirm}
         style={customStyles}
@@ -294,7 +301,7 @@ const HeaderComponent = function () {
           deleteId={deleteId}
           closeModalConfirm={closeModalConfirm}
         />
-      </Modal> */}
+      </Modal>
       {/* <Modal
         isOpen={modalIsOpenContact}
         onRequestClose={closeModalContact}
