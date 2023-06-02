@@ -9,10 +9,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signup from "./js/components/Signup";
 import Login from "./js/components/Login";
 import SetBudget from "./js/components/SetBudget";
-import  AddExpense from "./js/components/AddExpense";
+import AddExpense from "./js/components/AddExpense";
 import MainAnalysis from "./js/Pages/MainAnalysis";
 import MainDaily from "./js/Pages/MainDaily";
 import ConfirmDelete from "./js/components/ConfirmDelete";
+import Redeem from "./js/components/Redeem";
+import { useEffect } from "react";
 Modal.setAppElement("#root");
 const HeaderComponent = function () {
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -23,8 +25,26 @@ const HeaderComponent = function () {
   const [modalIsOpenContact, setIsOpenContact] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState();
   const [deleteId, setDeleteId] = useState();
-  const [editItemId,setEditItemId]=useState(null)
- 
+  const [editItemId, setEditItemId] = useState(null);
+  const [totalcoin, setTotalCoin] = useState(1);
+  const [showToast, setShowToast] = useState(false);
+
+  useEffect(() => {
+    var lastVisit = localStorage.getItem("lastVisit");
+    var today = new Date().toDateString();
+
+    if (lastVisit !== today) {
+      var points = parseInt(localStorage.getItem("points")) || 0;
+      var updatedPoints = points + 1;
+      setShowToast(true);
+      setTimeout(()=>{
+        setShowToast(false)
+      },2000)
+      setTotalCoin(updatedPoints);
+      localStorage.setItem("points", updatedPoints);
+      localStorage.setItem("lastVisit", today);
+    }
+  }, []);
 
   function openModalContact() {
     setIsOpenContact(true);
@@ -109,10 +129,14 @@ const HeaderComponent = function () {
       height: "82%",
     },
   };
-  return (
+
   
+  
+
+  return (
     <>
       <div className="font-lexend overflow-x-hidden">
+      
         <Routes>
           <Route
             path="/"
@@ -123,10 +147,11 @@ const HeaderComponent = function () {
                 openModalLogin={openModalLogin}
                 isLoggedIn={isLoggedIn}
                 setIsLoggedIn={setIsLoggedIn}
+                showToast={showToast}
               ></LandingPage>
             }
           />
-           <Route
+          <Route
             path="dashboard"
             element={
               <DashBoard
@@ -160,7 +185,7 @@ const HeaderComponent = function () {
                 />
               }
             ></Route>
-{/* 
+            {/* 
              <Route
               path="dailyspendanalysis"
               element={<MainSpendAnalysis />}
@@ -174,11 +199,15 @@ const HeaderComponent = function () {
                   openModalConfirm={openModalConfirm}
                 />
               }
-            ></Route> 
+            ></Route>
           </Route>
 
-            
-{/* 
+          <Route
+            path="redeem"
+            element={<Redeem totalcoin={totalcoin} />}
+          ></Route>
+
+          {/* 
           <Route path="/about-us" element={<Developers />} />
           <Route path="/contact-us" element={<Contact />} />  */}
         </Routes>
@@ -253,7 +282,10 @@ const HeaderComponent = function () {
             />
           </svg>
         </button>
-        <AddExpense editItemId={editItemId} closeModalExpense={closeModalExpense} />
+        <AddExpense
+          editItemId={editItemId}
+          closeModalExpense={closeModalExpense}
+        />
       </Modal>
 
       <Modal
