@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Segregator } from "../utilities/Categorysegregator";
 import DoughnutChart from "./DoughnutChart";
-import Investment from "../assets/Investment.svg";
+import Investment from "../assets/Investment.png";
 
 let total = 0;
 
@@ -92,7 +92,7 @@ export default function Daily() {
         {haveSpent ? (
           <DoughnutChart chartData={expenseData} />
         ) : (
-          <img className="p-5 h-5/6 m-6" src={Investment} alt="join now" />
+          <img className="p-5 h-5/6 m-6" src={Investment}  alt="join now" />
         )}
       </div>
     </div>

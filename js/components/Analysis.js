@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Segregator } from "../utilities/Categorysegregator";
 import DoughnutChart from "./DoughnutChart";
-import Investment from "../assets/Investment.svg";
+import Investment from "../assets/Investment.png";
 export default function Analysis(props) {
   const navigate = useNavigate();
   const [active, setActive] = useState("1");
