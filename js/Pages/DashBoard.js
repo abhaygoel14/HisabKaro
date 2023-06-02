@@ -24,8 +24,7 @@ export default function DashBoard(props) {
   }
 
   const handleLogOut = async () => {
-    const res = await fetch("/user/logout");
-    props.setIsLoggedIn(false);
+    localStorage.setItem("isLoggedIn",false)
     navigate("/");
   };
 

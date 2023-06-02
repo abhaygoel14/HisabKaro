@@ -6,19 +6,29 @@ import Menu from "../assets/Menu.png";
 import Close from "../assets/Close.png";
 
 export default function LandingPage(props) {
-//   const navigate = useNavigate();
+    const navigate = useNavigate();
 
   const handleLogout = async () => {
-    const res = await fetch("user/logout");
-    props.setIsLoggedIn(false);
-    navigate("/");
+    // const res = await fetch("user/logout");
+    // props.setIsLoggedIn(false);
+    localStorage.setItem("isLoggedIn",false)
+    window.location.reload()
+
   };
 
+
+  const data=JSON.parse(localStorage.getItem("isLoggedIn") )
 
   const [isMobile, setIsMobile] = useState(true);
 
   return (
     <div className="w-screen h-screen bg-rp-black lg:px-24 px-8">
+       {
+         props.showToast &&
+        <div style={{width:"100px"}}>
+         <button className="p-2" style={{position:"absolute",color:"black",top:"80px",right:"25px",backgroundColor:"white"}}>+1 coin added to your account</button>
+        </div>
+       }
       <nav className="nav-mobile lg:hidden ">
         <div
           className="pt-4 lg:flex lg:py-5 items-center lg:text-xl text-sm lg:justify-between justify-start"
@@ -49,9 +59,9 @@ export default function LandingPage(props) {
             }
           >
             {/* <Link to="/about-us"> */}
-              <div className="lg:px-4 px-1 py-4 cursor-pointer hover:bg-jp-black hover:rounded-md mx-2 ">
-                <h1>About Us</h1>
-              </div>
+            <div className="lg:px-4 px-1 py-4 cursor-pointer hover:bg-jp-black hover:rounded-md mx-2 ">
+              <h1>About Us</h1>
+            </div>
             {/* </Link> */}
             <div
               onClick={props.openModalContact}
@@ -71,7 +81,6 @@ export default function LandingPage(props) {
               <button
                 onClick={props.openModalLogin}
                 className="bg-mj-yellow text-mj-black px-3 py-1 rounded-md font-semibold hover:scale-110 duration-200 ease-in-out"
-                
               >
                 Login
               </button>
@@ -86,12 +95,21 @@ export default function LandingPage(props) {
         <h1 className="text-rp-yellow lg:text-4xl font-semibold text-xl">
           Hisab Karo
         </h1>
+
         <div className="grid grid-cols-3 lg:flex items-center lg:justify-between text-mj-yellow ">
-          {/* <Link to="/about-us"> */}
+          <Link to="/redeem">
+            <div
+              onClick={props.openModalContact}
+              className="lg:px-4 px-1 py-4 cursor-pointer hover:bg-jp-black hover:rounded-md ml-2 mr-4"
+            >
+              <h1>Redeem</h1>
+            </div>
+          </Link>
+          <Link to="/about-us">
             <div className="lg:px-4 px-1 py-4 cursor-pointer hover:bg-jp-black hover:rounded-md mx-2  ">
               <h1>About Us</h1>
             </div>
-          {/* </Link> */}
+          </Link>
           <div
             onClick={props.openModalContact}
             className="lg:px-4 px-1 py-4 cursor-pointer hover:bg-jp-black hover:rounded-md ml-2 mr-4"
@@ -99,7 +117,7 @@ export default function LandingPage(props) {
             <h1>Contact Us</h1>
           </div>
 
-          {props.isLoggedIn ? (
+          {data ? (
             <button
               onClick={handleLogout}
               className="bg-mj-yellow text-mj-black px-3 py-1 rounded-md font-semibold hover:scale-110 duration-200 ease-in-out"
@@ -119,21 +137,20 @@ export default function LandingPage(props) {
       <div className="lg:grid lg:grid-cols-2 text-slate-300 lg:h-5/6 mt-32 lg:mt-0">
         <div className="my-auto">
           <div className="lg:text-6xl lg:py-3 text-2xl p-1">
-            The{" "}
-            <span className="text-mj-yellow underline">Hisab Karo</span>{" "}
+            The <span className="text-mj-yellow underline">Hisab Karo</span>{" "}
             that works for you
           </div>
           <div className="lg:text-2xl py-2 text-xl mt-4">
             Track all your expenses here...
           </div>
-          {props.isLoggedIn ? (
+          {data? (
             <button
               onClick={() => {
                 navigate("/dashboard");
               }}
               className="bg-mj-yellow text-mj-black px-4 py-2 rounded-md font-semibold flex items-center w-fit my-2"
             >
-              Dashboard
+              Dashboard 
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="pl-1 w-8"
