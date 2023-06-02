@@ -9,6 +9,7 @@ let total = 0;
 export default function Daily() {
   const navigate = useNavigate();
   const [haveSpent, setHaveSpent] = useState(true);
+  const [total,setTotal]=useState(0)
   const [expenseData, SetExpenseData] = useState({
     datasets: [
       {
@@ -32,20 +33,22 @@ export default function Daily() {
   useEffect(() => {
     async function fetchDailyData() {
       const data =
-        (await JSON.parse(localStorage.getItem("userExpense"))) || [];
+       JSON.parse(localStorage.getItem("userExpense")) || [];
       var today = new Date();
       var formattedToday = today.toDateString();
-      var todayObject = data.find(function (item) {
+      var todayObject = data.filter(function (item) {
         return item.date === formattedToday;
       });
-
-      const Segregated = Segregator([todayObject]);
+      
+      
+      const Segregated = Segregator(todayObject);
+      console.log(Segregated);
       if (Segregated[1] === 0) {
         setHaveSpent(false);
       } else {
         setHaveSpent(true);
       }
-      total = Segregated[1];
+      setTotal(Segregated[1]);
       SetExpenseData({
         datasets: [
           {

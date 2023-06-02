@@ -29,43 +29,45 @@ export default function DailySpendAnalysis() {
 
   useEffect(() => {
     async function fetchDailyData() {
-      const res = await fetch("/expense/getdailyexpense");
-      const data = await res.json();
-      if (data.error) {
-        navigate("/");
-      } else {
-        const Segregated = Segregator(data.filterData);
-        total = Segregated[1];
-        SetExpenseData({
-          datasets: [
-            {
-              label: "Expense",
-              data: Object.values(Segregated[0]),
-              borderColor: "black",
-              backgroundColor: [
-                "rgba(195, 193, 200,1)",
-                "rgba(179, 178, 186,1)",
-                "rgb(173, 172, 181,1)",
-                "rgba(157, 157, 167, 1)",
-                "rgba(141, 142, 153, 1)",
-                "rgba(109, 111, 124, 1)",
-                "rgba(157, 157, 167, 1)",
-              ],
-              borderColor: [
-                "rgba(195, 193, 200,1)",
-                "rgba(179, 178, 186,1)",
-                "rgb(173, 172, 181,1)",
-                "rgba(157, 157, 167, 1)",
-                "rgba(141, 142, 153, 1)",
-                "rgba(109, 111, 124, 1)",
-                "rgba(157, 157, 167, 1)",
-              ],
-              borderWidth: 1,
-            },
-          ],
-          labels: Object.keys(Segregated[0]),
-        });
-      }
+      const data =
+        (await JSON.parse(localStorage.getItem("userExpense"))) || [];
+      var today = new Date();
+      var formattedToday = today.toDateString();
+      var todayObject = data.find(function (item) {
+        return item.date === formattedToday;
+      });
+
+      const Segregated = Segregator([todayObject]);
+      total = Segregated[1];
+      SetExpenseData({
+        datasets: [
+          {
+            label: "Expense",
+            data: Object.values(Segregated[0]),
+            borderColor: "black",
+            backgroundColor: [
+              "rgba(255, 99, 132, 0.4)",
+              "rgba(255, 159, 64, 0.4)",
+              "rgba(255, 205, 86, 0.4)",
+              "rgba(75, 192, 192, 0.4)",
+              "rgba(54, 162, 235, 0.4)",
+              "rgba(153, 102, 255, 0.4)",
+              "rgba(201, 203, 207, 0.4)",
+            ],
+            borderColor: [
+              "rgb(255, 99, 132)",
+              "rgb(255, 159, 64)",
+              "rgb(255, 205, 86)",
+              "rgb(75, 192, 192)",
+              "rgb(54, 162, 235)",
+              "rgb(153, 102, 255)",
+              "rgb(201, 203, 207)",
+            ],
+            borderWidth: 1,
+          },
+        ],
+        labels: Object.keys(Segregated[0]),
+      });
     }
     fetchDailyData();
   }, []);

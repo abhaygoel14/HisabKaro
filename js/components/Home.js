@@ -132,7 +132,11 @@ export default function Home(props) {
           <p>
             spend in {moment().format("MMM 1")}-{moment().format("MMM D")}
           </p>
-          <p>{Math.floor((TotalSpent / totalBudget) * 100)}% budget used</p>
+          {
+            totalBudget?   <p>{Math.floor((TotalSpent / totalBudget) * 100)}% budget used</p>
+            :
+            <p>0% budget used</p>
+          }
         </div>
         <div className="flex justify-between items-center">
           <div className="flex">
